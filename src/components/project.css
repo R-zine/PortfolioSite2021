@@ -1,0 +1,160 @@
+.Projects {
+  display: grid;
+  position: relative;
+  z-index: 90;
+  width: 95%;
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  justify-content: center;
+  left: 2.5%;
+  position: relative;
+  top: 100px;
+  justify-items: center;
+  gap: 40px 10px;
+  margin-bottom: 200px;
+}
+
+.Projects::before {
+  content: "";
+  z-index: 95;
+  width: 100vw;
+  height: 80px;
+  background-color: black;
+  display: block;
+  position: fixed;
+  top: 0;
+  box-shadow: 0 10px 30px black;
+}
+.Projects::after {
+  content: "";
+  z-index: 95;
+  width: 100vw;
+  height: 40px;
+  background-color: black;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 -10px 30px black;
+}
+.Project-component {
+  opacity: 1;
+  transform: translateX(0);
+  width: 520px;
+  height: 500px;
+  text-align: center;
+  box-shadow: 13px 13px 0px rgba(128, 128, 128, 0.667);
+  transition-duration: 0.9s;
+  transition-delay: calc(0.7s * var(--index));
+  transition-timing-function: ease-out;
+}
+
+.unloaded {
+  opacity: 0;
+  background-color: black;
+  box-shadow: 0px 0px 0px rgba(128, 128, 128, 0);
+}
+.project--main {
+  display: flex;
+  position: relative;
+  border: 1px solid white;
+  outline: 4px solid black;
+  width: 520px;
+  height: 500px;
+  justify-content: center;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 2;
+}
+.project--main img {
+  filter: grayscale(100%);
+  transition: 2s cubic-bezier(0.04, 0.9, 0.05, 0.87);
+
+  z-index: 1;
+}
+.project--main img:hover {
+  filter: grayscale(85%);
+  transform: scale(105%);
+  cursor: var(--hoverCursor);
+}
+.project--btn--container {
+  position: absolute;
+  left: 0;
+  width: 520px;
+  text-align: center;
+  bottom: 20px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+.source-btn {
+  position: relative;
+  border: 1px solid white;
+  width: 100px;
+
+  height: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.605);
+  padding: 2px;
+  transition: 0.5s;
+  z-index: 10;
+  margin-right: 0;
+}
+.source-btn:hover {
+  background-color: rgba(0, 0, 0, 0.831);
+  box-shadow: 0 7px 10px rgba(227, 227, 227, 0.945),
+    0 2px 5px rgba(11, 11, 11, 0.99);
+}
+.project--sidebar {
+  position: absolute;
+  transition: 1s;
+  height: 0px;
+  z-index: 2;
+  left: 2px;
+  width: calc(100% - 2px);
+  bottom: 0;
+  font-weight: bolder;
+  padding-top: 0;
+  word-wrap:normal;
+  color: rgba(0, 0, 0, 0);
+  background-color: rgb(4, 4, 4);
+}
+
+.open {
+  height: 167px;
+  bottom: 0px;
+  margin-bottom: -1px;
+  color: rgb(204, 204, 204);
+  padding-top: 17px;
+  z-index: 2;
+}
+
+@media screen and (max-width: 800px) {
+  .Projects {
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+  }
+  .Project-component {
+    min-width: 45%;
+    max-width: 96%;
+    box-shadow: 8px 8px 0px rgba(128, 128, 128, 0.667);
+  }
+  .project--main {
+    max-width: 100%;
+
+    outline: 2.5px solid black;
+  }
+
+  .project--sidebar {
+    position: absolute;
+    left: 2px;
+    width: calc(100% - 2px);
+    bottom: 0;
+    font-weight: bolder;
+    padding-top: 0;
+    color: rgba(0, 0, 0, 0);
+    background-color: rgb(4, 4, 4);
+    height: 167px;
+    margin-bottom: -1px;
+    color: rgb(204, 204, 204);
+    padding-top: 17px;
+    z-index: 2;
+  }
+}
