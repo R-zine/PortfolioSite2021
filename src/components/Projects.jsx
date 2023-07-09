@@ -34,7 +34,7 @@ const Projects = () => {
     ),
     new Proj(
       "./img/native.jpg",
-      "https://appetize.io/embed/wmt2t4k2p3agh4tttqwpm3ncpy",
+      "https://item-hunter-preview.netlify.app/",
       "https://github.com/R-zine/ItemHunter",
       "An AI-powered game in which the user gets points when they find one of 300 items in the real world. This App is built on React Native (Expo) and has TensorFlowJS object recognition. The score and current selection are handled via Redux with persistors. The built .APK is available in the GitHub repository."
     ),
