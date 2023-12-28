@@ -8,7 +8,7 @@ const Projects = () => {
   const Projects = [
     new Proj(
       "./img/portfolio2023.jpg",
-      "https://ivanradev.netlify.app/",
+      "https://ivanradev2023.netlify.app/",
       "https://github.com/R-zine/Portfolio-2023",
       `The new version of this website. Made entirely in 3D with React-Fiber with Drei and Rapier physics, powered by Redux Toolkit and GSAP.`
     ),
