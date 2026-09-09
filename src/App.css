@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
 
+  box-sizing: border-box;
+
   --font: "Poiret One", cursive;
 
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23BBB' d='M222.7 32.15C227.7 49.08 218.1 66.9 201.1 71.94C121.8 95.55 64 169.1 64 255.1C64 362 149.1 447.1 256 447.1C362 447.1 448 362 448 255.1C448 169.1 390.2 95.55 310.9 71.94C293.9 66.9 284.3 49.08 289.3 32.15C294.4 15.21 312.2 5.562 329.1 10.6C434.9 42.07 512 139.1 512 255.1C512 397.4 397.4 511.1 256 511.1C114.6 511.1 0 397.4 0 255.1C0 139.1 77.15 42.07 182.9 10.6C199.8 5.562 217.6 15.21 222.7 32.15V32.15z'/%3E%3C/svg%3E"),
@@ -11,15 +13,21 @@
 }
 
 html {
+  background-color: black;
   scroll-behavior: smooth;
 }
 
 body {
   background-color: black;
-
+  overflow-x: hidden;
   transition: 0.3s;
   font-family: var(--font);
   scroll-behavior: smooth;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: black;
 }
 
 ::-webkit-scrollbar {
@@ -31,6 +39,36 @@ a {
   color: white;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.route-loading,
+.webgl-fallback {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
 .Navbar {
   z-index: 150;
   display: flex;
@@ -38,6 +76,7 @@ a {
   position: fixed;
   justify-content: space-between;
   align-items: center;
+  box-sizing: content-box;
   min-width: 100vw !important;
   height: 30px;
   top: 0px;
@@ -52,6 +91,7 @@ a {
   max-width: 80%;
 }
 .navbar-link {
+  box-sizing: content-box;
   position: relative;
   margin: 0 20px;
   border: 1.5px solid white;
@@ -89,6 +129,10 @@ a {
   margin-right: 30px;
   top: 15px;
   transition: 0.4s;
+}
+.social-link {
+  display: inline-flex;
+  line-height: 0;
 }
 .git-icon {
   position: relative;
@@ -263,6 +307,10 @@ a {
   opacity: 1;
   transition: 1.5s;
 }
+.intro-overlay {
+  pointer-events: none;
+  animation: intro-fade 1.5s 0.5s ease forwards;
+}
 .invoke-text {
   font-size: 2.5vw;
   position: relative;
@@ -299,6 +347,7 @@ Canvas {
 .Contact {
   display: flex;
   position: absolute;
+  box-sizing: content-box;
   width: 100%;
   height: calc(100% - 100px);
   justify-content: center;
@@ -312,6 +361,7 @@ Canvas {
 }
 
 .contact-form input {
+  box-sizing: content-box;
   padding: 5px;
 
   box-shadow: -3px -3px 10px black;
@@ -329,6 +379,12 @@ Canvas {
   color: rgba(0, 0, 0, 0.911);
   text-align: center;
   color: rgba(255, 255, 255, 0.527);
+}
+
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.527);
+  opacity: 1;
+  text-align: center;
 }
 
 .contact-form input:nth-of-type(1):focus {
@@ -384,6 +440,7 @@ Canvas {
 }
 
 .contact-form textarea {
+  box-sizing: content-box;
   position: relative;
   width: 37vw;
   height: 19vw;
@@ -408,7 +465,8 @@ Canvas {
   top: 6vw;
 }
 
-.contact-form input:nth-of-type(4) {
+.contact-submit {
+  box-sizing: content-box;
   position: relative;
   padding-top: 1px;
   width: 8.5vw;
@@ -416,19 +474,40 @@ Canvas {
   top: 3.5vw;
   left: -18vw;
   z-index: 10;
+  font-family: inherit;
+  font-size: 2.5vmin;
+  font-weight: bolder;
+  color: rgba(208, 208, 208, 0.742);
+  border: 1px solid rgba(255, 255, 255, 0.527);
+  background-color: black;
+  transition: 0.5s;
 }
 
-.contact-form input:nth-of-type(4):hover {
+.contact-submit:hover:not(:disabled) {
   background-color: rgb(187, 187, 187);
   color: rgba(0, 0, 0, 0.819);
   cursor: var(--hoverCursor);
 }
 
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.form-error {
+  position: absolute;
+  width: 100%;
+  margin-top: 5vw;
+  color: #ffb4b4;
+  text-align: center;
+}
+
 .linkedin {
+  box-sizing: content-box;
   position: absolute;
   left: calc(40% + 20vw);
   top: calc(48% + 10vw);
-  background-image: url("../public/icons/linkedin.svg");
+  background-image: url("./assets/linkedin-brands.svg");
   background-position-x: 10px;
   background-repeat: no-repeat;
   width: 6vw;
@@ -442,19 +521,20 @@ Canvas {
 }
 
 .github {
+  box-sizing: content-box;
   position: absolute;
   left: calc(50% + 18vw);
   top: calc(38% + 20vw);
-  background-image: url("../public/icons/git.svg");
-  background-repeat: no-repeat;
+  background-image: url("./assets/git-square-brands.svg");
   background-position-x: 93%;
+  background-repeat: no-repeat;
   width: 6vw;
   height: 5vw;
   filter: invert(30%);
   transition: 0.3s;
   border: 4px solid rgb(0, 0, 0);
   outline: 1px solid white;
-  margin: 5 10px;
+  margin: 0;
   padding-right: 6vw;
 }
 
@@ -631,19 +711,13 @@ Canvas {
   }
 }
 
-.curtain {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0);
-  z-index: 105;
-  transition: 2s;
+@keyframes intro-fade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
-.fallen {
-  background-color: rgba(0, 0, 0, 1);
-  transition: 1s;
-}
 .lifted {
   display: none;
 }
@@ -793,6 +867,7 @@ Canvas {
     width: 90%;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin-top: -20%;
   }
 
@@ -825,9 +900,15 @@ Canvas {
     grid-column: 3/-1;
     grid-row: 1/2;
   }
-  .contact-form input:nth-of-type(4) {
+  .contact-submit {
     grid-column: 2/3;
     grid-row: 3/4;
+    position: unset;
+    justify-self: center;
+    margin: 25px auto;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
   }
   .contact-form textarea {
     display: block;
@@ -842,11 +923,7 @@ Canvas {
     height: inherit;
   }
 
-  .linkedin {
-    display: none;
-  }
-
-  .github {
+  .contact-socials {
     display: none;
   }
   .invoke-text {
@@ -892,14 +969,15 @@ Canvas {
     min-width: 80vw;
     height: 25vh;
   }
-  .contact-form :nth-child(5) {
-    height: 30px !important;
+  .contact-submit {
+    display: block;
+    position: static;
+    margin: 25px auto;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
   }
-  .linkedin {
-    display: none;
-  }
-
-  .github {
+  .contact-socials {
     display: none;
   }
   .invoke-text {
@@ -1059,6 +1137,7 @@ Canvas {
   content: "";
   border: 1px solid gray;
   transition: 0.5s;
+  pointer-events: none;
 }
 
 .Error:hover {
@@ -1069,4 +1148,29 @@ Canvas {
 .Error:hover::after {
   top: 0;
   right: 0;
+}
+
+.Error p {
+  margin: 1rem 0;
+}
+
+.error-home {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
