@@ -25,21 +25,39 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/three": "^0.141.0",
+    "eslint": "8.57.1",
     "gltfjsx": "4.6.4",
+    "husky": "9.1.7",
     "typescript": "4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings=0",
     "test": "react-scripts test",
     "test:ci": "react-scripts test --watchAll=false --coverage",
     "typecheck": "tsc --noEmit",
+    "validate": "yarn lint && yarn typecheck && yarn test:ci && yarn build",
+    "precommit": "yarn validate",
+    "prepare": "husky",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.test.ts",
+          "**/*.test.tsx"
+        ],
+        "rules": {
+          "testing-library/no-container": "off",
+          "testing-library/no-node-access": "off"
+        }
+      }
     ]
   },
   "jest": {
