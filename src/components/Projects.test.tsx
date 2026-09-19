@@ -21,9 +21,28 @@ describe("Projects", () => {
   test("uses root-relative image URLs at the domain root", () => {
     render(<Projects />);
 
-    expect(screen.getByAltText("Portfolio 2023 project preview")).toHaveAttribute(
+    expect(screen.getByAltText("Portfolio 2024 project preview")).toHaveAttribute(
       "src",
-      "/img/portfolio2023.jpg"
+      "/img/portfolio2024.jpg"
+    );
+  });
+
+  test("matches the current Netlify-hosted project set", () => {
+    expect(projects.map(({ id }) => id)).toEqual([
+      "portfolio-2024",
+      "aiditorial",
+      "wasm-benchmark",
+      "rust-model-viewer",
+      "go-model-viewer",
+      "unfair-pong",
+      "portfolio-2023",
+      "stackr",
+      "personal-paintings",
+      "item-hunter",
+      "architect-portfolio",
+    ]);
+    expect(projects.every(({ demoURL }) => demoURL.startsWith("https://"))).toBe(
+      true
     );
   });
 
